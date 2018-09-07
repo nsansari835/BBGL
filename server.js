@@ -31,7 +31,7 @@ app.use(flash());
    host     : 'localhost',
    user     : 'root',
    password : 'root',
-   database : 'subdemodb',
+   database : 'bbgdb7',
    port     : '3306',
  });
   

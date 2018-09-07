@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'subdemodb',
+    database: 'bbgdb7',
     port: '3306',
 });
 
@@ -18,10 +18,15 @@ module.exports = function (app) {
 
     app.post('/adduser', function (request, response) {
         console.log("reached the route for makerest")
-        connection.query(`INSERT INTO users(email, password, name, dob, state, city, industry, created_at, updated_at) VALUES ('${request.body.email}', '${request.body.password}', '${request.body.name}', '${request.body.dob}', '${request.body.state}', '${request.body.city}', '${request.body.industry}', NOW(), NOW())`, function (error, results, fields) {
+        connection.query(`INSERT INTO users(email, password, first_name, last_name, dob, state, city, industry, created_at, updated_at) VALUES ('${request.body.email}', '${request.body.password}', '${request.body.first_name}', '${request.body.last_name}', '${request.body.dob}', '${request.body.state}', '${request.body.city}', '${request.body.industry}', NOW(), NOW())`, function (error, results, fields) {
             if (error) {
                 throw error;
                 console.log('The solution is: ', results, error);
+            }
+            else if (results) {
+                console.log(results, "UPDATED TABLE FOR EDIT    ")
+                response.json({ message: "Successfully updated" })
+                return response.redirect('/')
             }
             // else if(request.body.password.length < 6){
             //     throw error;
@@ -191,7 +196,7 @@ module.exports = function (app) {
     app.get('/subscribed', function (request, response) {
         console.log("reached the route for PULL SUBSCRIPTIONS")
         if (request.session.user_id) {
-            connection.query(`SELECT industries.name as ind_name, industries.id as ind_id FROM industries JOIN subscriptions ON industries.id = subscriptions.industries_id AND subscriptions.users_id = '${request.session.user_id}'
+            connection.query(`SELECT industries.ind_name as ind_name, industries.id as ind_id FROM industries JOIN subscriptions ON industries.id = subscriptions.industries_id AND subscriptions.users_id = '${request.session.user_id}'
             JOIN users ON subscriptions.users_id = users.id;`, function (error, data) {
                     if (error) {
                         console.log("SUBSCRIPTION ERROR:", error)
@@ -211,7 +216,7 @@ module.exports = function (app) {
     app.get('/subscribedposts', function (request, response) {
         console.log("reached the route for PULL SUBSCRIPTIONS")
         if (request.session.user_id) {
-            connection.query(`SELECT industries.name as ind_name, posts.post as posts, users.id as u_id, industries.id as ind_id, posts.id as post_id, users.name as user_name
+            connection.query(`SELECT industries.ind_name as ind_name, posts.post as posts, users.id as u_id, industries.id as ind_id, posts.id as post_id, users.first_name as first_name, users.last_name as last_name
             FROM industries 
             JOIN subscriptions 
             ON industries.id = subscriptions.industries_id 
@@ -238,7 +243,7 @@ module.exports = function (app) {
         console.log("reached the route for PULLING INDUSTRY POSTS $$$$$$$$$$$$$$$$$$$$")
         if (request.session.user_id) {
             connection.query(`SELECT 
-            posts.id as post_id, posts.post as post, posts.created_at as post_created_at, posts.updated_at as post_updated_at, posts.industries_id as posts_industries_id, posts.users_id as posts_users_id, users.id as user_id, users.name as users_name, industries.id as industry_id, industries.name as industry_name
+            posts.id as post_id, posts.post as post, posts.created_at as post_created_at, posts.updated_at as post_updated_at, posts.industries_id as posts_industries_id, posts.users_id as posts_users_id, users.id as user_id, users.first_name as first_name, users.last_name as last_name, industries.id as industry_id, industries.ind_name as industry_name
             FROM posts 
             JOIN users
             ON users.id = posts.users_id
@@ -261,7 +266,7 @@ module.exports = function (app) {
     app.get('/getcomments', function (request, response) {
         console.log("reached the route for PULLING INDUSTRY POSTS $$$$$$$$$$$$$$$$$$$$")
         if (request.session.user_id) {
-            connection.query(`SELECT users.name, comments.comment, comments.posts_id, comments.created_at
+            connection.query(`SELECT users.first_name, comments.comment, comments.posts_id, comments.created_at
             FROM users
             JOIN comments
             ON users.id = comments.users_id;`, function (error, data) {
