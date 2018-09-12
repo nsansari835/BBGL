@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title></title>
+
+  <!-- font-awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+    rel='stylesheet' type='text/css'>
+
+  <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/creative.min.css" rel="stylesheet">
+
+</head>
+<div class="form-popup" id="myForm">
+  <form action="/login" class="form-container" method="POST">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" >
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" >
+
+    <input type="submit" class="btn" value="login">
+    
+  </form>
+  <button class="btn cancel" onclick="closeForm()">Close</button>
+  <p>Don't have an account? </p><a href="https://localhost8000/signup">Sign up!</a>
+</div>
+
+<body id="page-top">
+  <div class="sidenav" onclick="openForm()">
+    <div class="open-button" onclick="openForm()"> <p class="login">login</p></div>
+  </div>
+  <header class="masthead text-center text-white d-flex">
+   
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <div class="bblogo">
+        <img src="img/BIG_BIZ_ICON.png" alt="" width="50px" height="50px">
+      </div>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Big Biz Global</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#page-top">Welcome</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#portfolio">Entrepreneurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#myForm" onclick="openForm()">Sign In</a>
+            </li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+  <section class="bg-primary" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading text-white">The Big Biz Journey</h2>
+
+          <hr class="light my-4">
+          <p class="body-text">
+            The Big Biz Journey serves to foster relationships and help guide ambitious entrepreneurs in becoming well-prepared in launching
+            their own companies. The Journey is building your dream and vision from the foundation up, brick by brick, which
+            is a lifelong process that involves many sacrifices and commitment. We want entrepreneurs to be able to network
+            with like-minded individuals, collaborate with others who are passionate about the same things you are, share
+            ideas & advice, share accomplishments/milestones/achievements with others and learn from well-seasoned professionals
+            who have years of experience. We want more and more entrepreneurs to be successful so come along this revolutionizing
+            journey with us and master your entrepreneurship strategy/skills and begin to build your next big biz.
+          </p>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Explore the Lifestyle!</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Build Your Big Biz Dream</h2>
+          <h2 class="section-heading">Create Your Future</h2>
+          <hr class="my-4">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fas fa-4x fa-cog text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Design Your Plan</h3>
+
+          </div>
+          <p class="subtext">Start with the building blocks that you need to build your business from the ground up.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fas fa-4x fa-clipboard text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Set Your Goals</h3>
+
+
+            <p class="subtext">Be able to determine what tasks you want to undertake as you go along the startup journey.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fas fa-4x fa-city text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Launch Your Biz</h3>
+
+
+            <p class="subtext">Have access to all the tools that you need to take your company to achieve new heights.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fas fa-4x fa-bullseye text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Execute Your Strategy</h3>
+            <p class="text-muted mb-0">Communicate, collaborate, and network with other entrepreneurs within the Global community.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-primary" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading text-white">Be Monumental, Become an Icon</h2>
+
+          <hr class="light my-4">
+          <p class="text-faded mb-4">
+            To create a global social lifestyle brand that embraces an exclusive community of world-class entrepreneurs who are all dedicated,
+            determined and driven to succeed in building their brand and/or business.
+          </p>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#portfolio">From the Start Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+
+    <div class="mySlides fade">
+
+      <img src="img/slideshow/america-architecture-buildings-755050.jpg" width="100%"
+        height="100%">
+
+    </div>
+
+    <div class="mySlides fade">
+
+      <img src="img/slideshow/brooklyn-bridge-at-night_4460x4460.jpg"
+        width="100%" height="100%">
+
+    </div>
+
+    <div class="mySlides fade">
+
+      <img src="img/slideshow/statue-of-liberty-992552_1920.jpg"
+        width="100%" height="100%">
+
+    </div>
+    <div class="mySlides fade">
+    <img src="img/slideshow/IMG_0890.jpg"
+      width="100%" height="100%">
+
+  </div>
+  <div class="mySlides fade">
+  <img src="img/slideshow/IMG_0891.jpg"
+  width="100%" height="100%">
+
+</div>
+  </div>
+
+  <section class="bg-primary" id="portfolio">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading text-white">From the Start Up</h2>
+
+          <hr class="light my-4">
+          <p class="body-text">
+            Entrepreneurs are able to fully develop a clear vision within the Big Biz Global community and begin to develop their dream
+            brick by brick with the support, collaboration and network of other ambitious entrepreneurs and well-seasoned
+            professionals. Once you register on the Big Biz Global platform you will have access to an interactive community
+            forum in which you can create a unique profile that will stand out, business network with others, share your
+            advice and opinions with others, ask a question, comment or share insight within your community industry and
+            communicate with knowledgeable professionals one-on-one online via our face-to-face chat or our chat messenger.
+          </p>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="#contact">Have Questions?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading">Let's Connect</h2>
+          <hr class="my-4">
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 ml-auto text-center">
+          <i class="fab fa-instagram fa-3x mb-3 sr-contact"></i>
+          <p>
+            <a href="https://www.instagram.com/bigbizglobal/">Instagram</a>
+          </p>
+        </div>
+        <div class="col-lg-4 ml-auto text-center">
+          <i class="fab fa-facebook fa-3x mb-3 sr-contact"></i>
+          <p>
+            <a href="https://www.facebook.com/bigbizglobal/">Facebook</a>
+          </p>
+        </div>
+        <div class="col-lg-4 mr-auto text-center">
+          <i class="far fa-envelope fa-3x mb-3 sr-contact"></i>
+          <p>
+            <a href="mailto:your-support@bigbizglobal.com">support@bigbizglobal.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/creative.min.js"></script>
+
+  <script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 7500); // Change image every 2 seconds
+    }
+
+  </script>
+
+
+</body>
+
+</html>

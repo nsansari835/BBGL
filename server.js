@@ -4,6 +4,10 @@
  var path = require('path');
  var app = express();
 
+ app.use(bodyParser.json());
+ app.use(bodyParser.urlencoded({ extended: false}));
+
+
 // #################################################################
 // Espress-Session
 
@@ -49,7 +53,8 @@ app.use(flash());
  app.use(bodyParser.json());
  
  // Angular app 
- app.use(express.static(__dirname + '/client/dist/client' )); // <-- MAKE SURE YOU name YOUR Angular as "public", 
+ app.use(express.static(__dirname + '/client/dist/client' ));
+ app.use(express.static(__dirname + '/BBG' )); // <-- MAKE SURE YOU name YOUR Angular as "public", 
  // or UPDATE this path appropriate to what you named your Angular directory.
  
  // Mongoose config require
@@ -58,7 +63,11 @@ app.use(flash());
  // Require route for server.js
  var routes_setter = require('./server/config/routes.js');
  // Invoke route
+
  routes_setter(app);
+ app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
  app.all("*", (req,res,next) => {
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
@@ -66,6 +75,7 @@ app.use(flash());
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
      res.sendFile(path.resolve("./client/dist/client/index.html"))
  });
+
  
  app.listen(8000, function() {
      console.log('Listening to port 8000 ..');

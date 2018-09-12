@@ -60,6 +60,29 @@ module.exports = function (app) {
         })
 
     })
+    app.post("/login", (request, response, next) => {
+        console.log("Server > POST '/sessions' | req.body: ", request.body);
+        connection.query(`SELECT * FROM users WHERE users.email = '${request.body.email}' LIMIT 1 `, function (error, results, user) {
+
+
+
+            if (error) {
+                console.log("SELECT user ERROR: ", error)
+            }
+            else if (results /*&& results.length > 0*/) {
+                console.log("SELECT user SUCCESS - results:", results);
+                console.log("PRESESSION SESSION", request.session.user_id, "THIS IS SESSSION")
+                request.session.user_id = results[0].id;
+                console.log(results[0].id, "REQUEST ID")
+                console.log(request.session.user_id, "THIS IS SESSSION")
+                return response.redirect('/dashboard')
+                // return response.redirect('/')
+            } else {
+                console.log("Something is weird");
+            }
+        })
+
+    })
 
     // app.use(function(request, response, next){
     //     if(request.session.user_id){
@@ -99,7 +122,7 @@ module.exports = function (app) {
         if (request.session.user_id) {
             connection.query(`SELECT * FROM users WHERE users.id = '${request.session.user_id}' LIMIT 1 `)
             console.log(request.session.user_id)
-            return response.render('/dashboard')
+            return response.redirect('./client/dist/client/index.html')
         } else if (request.session.user_type === 'admin') {
 
         }
@@ -180,7 +203,24 @@ module.exports = function (app) {
         console.log("THIS IS THE SESSION", request.session.user_id, "reached the route for MAKING A comment", request.body, "THIS IS THE SESSION", request.session.user_id)
         console.log("THIS IS THE SESSION", request.session.user_id)
 
-        connection.query(`INSERT INTO comments(comment, users_id, created_at, udpated_at, posts_id) VALUES ('${request.body.comment}', '${request.session.user_id}', NOW(), NOW(), '${request.body.post_id}')`, function (error, results, fields) {
+        connection.query(`INSERT INTO comments(comment, users_id, created_at, updated_at, posts_id) VALUES ('${request.body.comment}', '${request.session.user_id}', NOW(), NOW(), '${request.body.post_id}')`, function (error, results, fields) {
+            if (error) {
+                throw error;
+                console.log("THERE WAS A PROBLEM WITH THE comment", error)
+            }
+            else if (results) {
+                console.log(results, "comment WAS SUCCESSFULLY MADE")
+                response.json({ data: results, message: "Successful" })
+            }
+
+        });
+    })
+    app.post('/addbookmark', function (request, response) {
+        console.log("THIS IS THE SESSION", request.session.user_id)
+        console.log("THIS IS THE SESSION", request.session.user_id, "reached the route for MAKING A comment", request.body, "THIS IS THE SESSION", request.session.user_id)
+        console.log("THIS IS THE SESSION", request.session.user_id)
+
+        connection.query(`INSERT INTO bookmark(users_id, posts_id, posts_industries_id) VALUES ('${request.session.user_id}', '${request.body.post_id}'), '${request.body.industry}'`, function (error, results, fields) {
             if (error) {
                 throw error;
                 console.log("THERE WAS A PROBLEM WITH THE comment", error)
@@ -284,7 +324,4 @@ module.exports = function (app) {
         }
     })
 
-    app.get('*', (req, response) => {
-        response.sendFile(path.resolve('./client/dist/client/index.html'));
-    })
 }
