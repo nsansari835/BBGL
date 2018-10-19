@@ -217,22 +217,38 @@ module.exports = function (app) {
     })
     app.post('/addbookmark', function (request, response) {
         console.log("THIS IS THE SESSION", request.session.user_id)
-        console.log("THIS IS THE SESSION", request.session.user_id, "reached the route for MAKING A comment", request.body, "THIS IS THE SESSION", request.session.user_id)
+        console.log("THIS IS THE SESSION", request.session.user_id, "reached the route for MAKING A BOOKMARK", request.body, "THIS IS THE SESSION", request.session.user_id)
         console.log("THIS IS THE SESSION", request.session.user_id)
 
-        connection.query(`INSERT INTO bookmark(users_id, posts_id, posts_industries_id) VALUES ('${request.session.user_id}', '${request.body.post_id}'), '${request.body.industry}'`, function (error, results, fields) {
+        connection.query(`INSERT INTO bookmark(posts_id, posts_ind_id, users_id) VALUES ('${request.body.post_id}', '${request.body.posts_ind_id}', '${request.session.user_id}')`, function (error, results, fields) {
             if (error) {
                 throw error;
-                console.log("THERE WAS A PROBLEM WITH THE comment", error)
+                console.log("THERE WAS A PROBLEM WITH THE BOOKMARK", error)
             }
             else if (results) {
-                console.log(results, "comment WAS SUCCESSFULLY MADE")
+                console.log(results, "BOOKMARK WAS SUCCESSFULLY MADE")
                 response.json({ data: results, message: "Successful" })
             }
 
         });
     })
+    app.post('/addsubscription', function (request, response) {
+        console.log("THIS IS THE SESSION", request.session.user_id)
+        console.log("THIS IS THE SESSION", request.session.user_id, "reached the route for MAKING A BOOKMARK", request.body, "THIS IS THE SESSION", request.session.user_id)
+        console.log("THIS IS THE SESSION", request.session.user_id)
 
+        connection.query(`INSERT INTO subscriptions(industries_id, users_id) VALUES ('${request.body.industries_id}', '${request.session.user_id}')`, function (error, results, fields) {
+            if (error) {
+                throw error;
+                console.log("THERE WAS A PROBLEM WITH THE BOOKMARK", error)
+            }
+            else if (results) {
+                console.log(results, "BOOKMARK WAS SUCCESSFULLY MADE")
+                response.json({ data: results, message: "Successful" })
+            }
+
+        });
+    })
     app.get('/subscribed', function (request, response) {
         console.log("reached the route for PULL SUBSCRIPTIONS")
         if (request.session.user_id) {
@@ -315,6 +331,55 @@ module.exports = function (app) {
                     }
                     else if (data) {
                         console.log(data, "ALL THE COMMENTS")
+                        response.json({ data: data })
+                    }
+                });
+        }
+        else {
+            return response.redirect('/')
+        }
+    })
+    app.get('/industries', function (request, response) {
+        console.log("reached the route for PULLING SUBSCRIPTIONS POSTS $$$$$$$$$$$$$$$$$$$$")
+        if (request.session.user_id) {
+            connection.query(`SELECT industries.ind_name as ind_name, industries.id as ind_id 
+            FROM industries 
+            JOIN subscriptions 
+            ON industries.id != subscriptions.industries_id 
+            AND subscriptions.users_id = '${request.session.user_id}'
+            JOIN users 
+            ON subscriptions.users_id = users.id;`, function (error, data) {
+                    if (error) {
+                        console.log("GET COMMENTS LOAD ERROR:", error)
+                    }
+                    else if (data) {
+                        console.log(data, "ALL THE COMMENTS")
+                        response.json({ data: data })
+                    }
+                });
+        }
+        else {
+            return response.redirect('/')
+        }
+    })
+
+    app.get('/bookmarkposts', function (request, response) {
+        console.log("reached the route for PULL SUBSCRIPTIONS")
+        if (request.session.user_id) {
+            connection.query(`SELECT industries.ind_name as ind_name, posts.post as posts, users.id as u_id, industries.id as ind_id, posts.id as post_id, users.first_name as first_name, users.last_name as last_name
+            FROM industries 
+            JOIN bookmark 
+            ON industries.id = bookmark.industries_id 
+            AND bookmark.users_id = '${request.session.user_id}'
+            JOIN users
+             ON bookmark.users_id = users.id
+             JOIN posts
+             ON industries.id = posts.industries_id;`, function (error, data) {
+                    if (error) {
+                        console.log("SUBSCRIPTION ERROR:", error)
+                    }
+                    else if (data) {
+                        console.log(data, "SUBSCRIBED INDUSTRY INFO")
                         response.json({ data: data })
                     }
                 });

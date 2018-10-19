@@ -3,6 +3,8 @@
  var bodyParser = require('body-parser');
  var path = require('path');
  var app = express();
+ var http = require('http').Server(app);
+ var io = require('socket.io')(http);
 
  app.use(bodyParser.json());
  app.use(bodyParser.urlencoded({ extended: false}));
@@ -64,19 +66,28 @@ app.use(flash());
  var routes_setter = require('./server/config/routes.js');
  // Invoke route
 
+
+
+
  routes_setter(app);
  app.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+
+
  app.all("*", (req,res,next) => {
       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
      res.sendFile(path.resolve("./client/dist/client/index.html"))
  });
 
- 
- app.listen(8000, function() {
+ io.on('connection', function(socket){
+    socket.on('chat message', function(msg){
+      io.emit('chat', msg);
+    });
+  });
+
+ http.listen(8000, function() {
      console.log('Listening to port 8000 ..');
  })
